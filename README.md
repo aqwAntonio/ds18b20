@@ -1,1 +1,1 @@
-i trying to create a cozy smart home
+i trying to create a cozy home in any weather
