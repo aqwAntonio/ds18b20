@@ -1,0 +1,9 @@
+[yandex.weather]
+lat =
+lon =
+lang =
+api_key =
+
+[xiaomi.fan]
+ip =
+token =
