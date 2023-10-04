@@ -130,19 +130,35 @@ def main(address=None):
 
 
 if __name__ == '__main__':
-    attempt = 0
-    RomData = [40, 205, 15, 129, 227, 3, 60, 153]
-    while attempt < 10:
-        attempt += 1
-        t1 = main(address=RomData)
-        t2 = main(address=RomData)
-        if 40 > t1 > 10 and 40 > t2 > 10:
-            diff = abs(t1 - t2)
-            if diff > 0.5:
-                print("the attempt #" + str(attempt) + " failed")
-                continue
+
+    t = {'window': None, 'room': None}
+
+    RomList = {
+        'window': [40, 205, 15, 129, 227, 3, 60, 153],  # 1m
+        'room': [40, 23, 95, 129, 227, 253, 60, 66]  # 3m
+    }
+    for sensor, rom_data in RomList.items():
+        attempt = 0
+        while attempt < 10:
+            attempt += 1
+            t1 = main(address=rom_data)
+            t2 = main(address=rom_data)
+            if 40 > t1 > 10 and 40 > t2 > 10:
+                diff = abs(t1 - t2)
+                if diff > 0.5:
+                    print("the attempt #" + str(attempt) + " failed")
+                    continue
+                else:
+                    save_temp(sensor + ': ' + str(t2))
+                    t[sensor] = t2
+                    break
             else:
-                save_temp(t2)
-                quit()
-        else:
-            print("the attempt #" + str(attempt) + " failed")
+                print("the attempt #" + str(attempt) + " failed")
+
+    config = configparser.ConfigParser()
+    config.read('/home/orangepi/wiringOP-Python/config.ini')
+
+    if t['window'] < 20.3 and t['room'] < 22.3:
+        plug = ChuangmiPlug(config['xiaomi.plug']['ip'], config['xiaomi.plug']['token'])
+        plug.on()
+
