@@ -1,0 +1,26 @@
+version: "3.7"
+
+services:
+
+  home-db:
+    image: docker.io/library/postgres:15-alpine
+    container_name: home-db
+    restart: always
+    ports:
+      - "15432:5432"
+    volumes:
+      - ~/Apps/weather/docker/database:/var/lib/postgresql/data:Z
+    labels:
+      - io.containers.autoupdate=registry
+    environment:
+      - POSTGRES_USER=home_user
+      - POSTGRES_PASSWORD_FILE=/run/secrets/db_password
+      - POSTGRES_DB=home_database
+      - TZ=Asia/Yekaterinburg
+    secrets:
+      - db_password
+
+
+secrets:
+  db_password:
+    external: true
