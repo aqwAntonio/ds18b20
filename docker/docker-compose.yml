@@ -3,11 +3,11 @@ version: "3.7"
 services:
 
   home-db:
-    image: docker.io/library/postgres:15-alpine
+    image: docker.io/library/postgres:latest
     container_name: home-db
     restart: always
     ports:
-      - "15432:5432"
+      - "5432:5432"
     volumes:
       - ~/Apps/weather/docker/database:/var/lib/postgresql/data:Z
     labels:
