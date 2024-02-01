@@ -1,0 +1,14 @@
+[database]
+database =
+user =
+password =
+host =
+port =
+
+[yandex.weather.params]
+lat =
+lon =
+lang =
+
+[yandex.weather.headers]
+X-Yandex-API-Key =
