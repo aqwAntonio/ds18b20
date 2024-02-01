@@ -7,7 +7,7 @@ services:
     container_name: home-db
     restart: always
     ports:
-      - "5432:5432"
+      - "15432:5432"
     volumes:
       - ~/Apps/weather/docker/database:/var/lib/postgresql/data:Z
     labels:
@@ -19,6 +19,18 @@ services:
       - TZ=Asia/Yekaterinburg
     secrets:
       - db_password
+
+  home-python:
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    container_name: home-python
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./python/:/usr/src/app:Z
+    depends_on:
+      - home-db
 
 
 secrets:
