@@ -2,8 +2,8 @@
 database =
 user =
 password =
-host =
-port =
+host = home-db
+port = 5432
 
 [yandex.weather.params]
 lat =

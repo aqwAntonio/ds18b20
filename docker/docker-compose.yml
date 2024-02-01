@@ -25,8 +25,6 @@ services:
       context: .
       dockerfile: ./Dockerfile
     container_name: home-python
-    ports:
-      - "8000:8000"
     volumes:
       - ./python/:/usr/src/app:Z
     depends_on:

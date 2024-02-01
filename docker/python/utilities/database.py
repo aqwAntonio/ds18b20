@@ -1,4 +1,4 @@
-from config import get_config
+from .config import get_config
 from peewee import PostgresqlDatabase
 
 
