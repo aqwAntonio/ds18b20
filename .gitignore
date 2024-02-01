@@ -1,3 +1,5 @@
 .idea
 config.ini
 test.*
+database
+__pycache__
