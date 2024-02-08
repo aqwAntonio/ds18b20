@@ -5,6 +5,8 @@ from .config import get_config
 from .database import db
 from peewee import *
 
+tz = datetime.timezone(datetime.timedelta(hours=5))
+
 
 # {'now': 1706802976, 'now_dt': '2024-02-01T15:56:16.197475Z',
 #  'info': {'url': 'https://yandex.ru/pogoda/50?lat=58.001123&lon=56.272769', 'lat': 58.001123, 'lon': 56.272769},
@@ -36,7 +38,7 @@ class YandexWeather(Model):
     polar = TextField()
     season = TextField()
     wind_gust = TextField()
-    created_at = DateTimeField(default=datetime.datetime.now)
+    created_at = DateTimeField(default=datetime.datetime.now(tz))
 
     class Meta:
         database = db
