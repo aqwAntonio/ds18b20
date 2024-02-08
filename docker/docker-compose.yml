@@ -27,8 +27,6 @@ services:
     container_name: home-python
     volumes:
       - ./python/:/usr/src/app:Z
-    depends_on:
-      - home-db
 
 
 secrets:
