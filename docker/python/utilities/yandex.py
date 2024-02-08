@@ -58,6 +58,7 @@ def save_data(data):
         # Создание таблицы
         db.create_tables([YandexWeather])
         # Вставка данных
+        data['fact']['created_at'] = datetime.datetime.now(tz=datetime.timezone(datetime.timedelta(hours=5)))
         YandexWeather.create(**data['fact'])
         # close connection
         db.close()

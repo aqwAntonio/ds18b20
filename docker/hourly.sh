@@ -1,3 +1,4 @@
+exit
 db_status=$(podman inspect home-db --format "{{.State.Status}}")
 if [[ $db_status != "running" ]]
 then
