@@ -43,6 +43,32 @@ class YandexWeather(Model):
         db_table = 'yandex_weather'
 
 
+class YandexWeatherForecast(Model):
+    part_name = TextField()
+    temp_min = TextField()
+    temp_avg = TextField()
+    temp_max = TextField()
+    wind_speed = TextField()
+    wind_gust = TextField()
+    wind_dir = TextField()
+    pressure_mm = TextField()
+    pressure_pa = TextField()
+    humidity = TextField()
+    prec_mm = TextField()
+    prec_prob = TextField()
+    prec_period = TextField()
+    icon = TextField()
+    condition = TextField()
+    feels_like = TextField()
+    daytime = TextField()
+    polar = TextField()
+    created_at = DateTimeField(default=datetime.datetime.now)
+
+    class Meta:
+        database = db
+        db_table = 'yandex_weather_forecast'
+
+
 def import_data():
     data = requests.get(
         'https://api.weather.yandex.ru/v2/informers/',
@@ -53,15 +79,28 @@ def import_data():
 
 
 def save_data(data):
-    if 'fact' in data:
-        db.connect()
-        # Создание таблицы
-        db.create_tables([YandexWeather])
-        # Вставка данных
-        data['fact']['created_at'] = datetime.datetime.now(tz=datetime.timezone(datetime.timedelta(hours=5)))
-        YandexWeather.create(**data['fact'])
-        # close connection
-        db.close()
+    if 'fact' in data and 'forecast' in data:
+        if 'fact' in data:
+            db.connect()
+            # Создание таблицы
+            db.create_tables([YandexWeather])
+            # Вставка данных
+            data['fact']['created_at'] = datetime.datetime.now(tz=datetime.timezone(datetime.timedelta(hours=5)))
+            YandexWeather.create(**data['fact'])
+            # close connection
+            db.close()
+
+        if 'forecast' in data:
+            db.connect()
+            # Создание таблицы
+            db.create_tables([YandexWeatherForecast])
+            # Вставка данных
+            if 'parts' in data['forecast']:
+                for part in data['forecast']['parts']:
+                    part['created_at'] = datetime.datetime.now(tz=datetime.timezone(datetime.timedelta(hours=5)))
+                    YandexWeatherForecast.create(**part)
+            # close connection
+            db.close()
 
         return True
 
@@ -71,4 +110,4 @@ def save_data(data):
 def run_import():
     data = import_data()
     print(data)
-    return save_data(data)
+    save_data(data)
