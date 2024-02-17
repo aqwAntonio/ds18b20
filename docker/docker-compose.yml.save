@@ -1,0 +1,35 @@
+
+version: "3.7"
+
+services:
+
+  home-db:
+    image: docker.io/library/postgres:latest
+    container_name: home-db
+    restart: always
+    ports:
+      - "5432:5432"
+    volumes:
+      - ~/Apps/weather/docker/database:/var/lib/postgresql/data:Z
+    labels:
+      - io.containers.autoupdate=registry
+    environment:
+      - POSTGRES_USER=home_user
+      - POSTGRES_PASSWORD_FILE=/run/secrets/db_password
+      - POSTGRES_DB=home_database
+      - TZ=Asia/Yekaterinburg
+    secrets:
+      - db_password
+
+  home-python:
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    container_name: home-python
+    volumes:
+      - ./python/:/usr/src/app:Z
+
+
+secrets:
+  db_password:
+    external: true
