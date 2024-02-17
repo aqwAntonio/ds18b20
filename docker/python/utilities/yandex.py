@@ -109,5 +109,4 @@ def save_data(data):
 
 def run_import():
     data = import_data()
-    print(data)
-    save_data(data)
+    return save_data(data)
