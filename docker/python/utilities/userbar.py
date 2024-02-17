@@ -24,7 +24,7 @@ def image_generating(data):
                 # Рисуем текст на картинке (1st line)
                 draw.text(
                     (x, y + delta_y),
-                    "Evening: " +
+                    part['part_name'].capitalize() + ": " +
                     str(part['temp_min']) + "..." + str(part['temp_max']) +
                     " " + part['condition'] + ". Feels like " + str(part['feels_like']) +
                     ". Wind speed " + str(part['wind_speed']) + " up to " + str(part['wind_gust']) + " m/s",
