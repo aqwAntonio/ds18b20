@@ -6,7 +6,7 @@ from PIL import Image, ImageDraw, ImageFont
 def image_generating(data):
     if 'forecast' in data:
         # Создаем прозрачную картинку
-        image = Image.new('RGBA', (450, 40), (255, 255, 255, 0))
+        image = Image.new('RGBA', (500, 40), (255, 255, 255, 0))
 
         # Загружаем шрифт TrueType
         font = ImageFont.truetype("Arial.ttf", 14)
