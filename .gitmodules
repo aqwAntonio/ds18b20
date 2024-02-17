@@ -1,0 +1,3 @@
+[submodule "docker/python/utilities/images"]
+	path = docker/python/utilities/images
+	url = https://github.com/aqwAntonio/weather-log.git
