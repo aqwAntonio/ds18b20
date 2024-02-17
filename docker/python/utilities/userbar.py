@@ -33,6 +33,6 @@ def image_generating(data):
                 delta_y = 20
 
         # Путь к сохраняемой картинке
-        save_path = os.path.join(os.getcwd(), "images", "weather.png")
+        save_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "images", "weather.png")
         # Сохраняем картинку
         image.save(save_path)
