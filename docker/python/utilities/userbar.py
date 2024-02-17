@@ -25,9 +25,9 @@ def image_generating(data):
                 draw.text(
                     (x, y + delta_y),
                     "Evening: " +
-                    part['temp_min'] + "..." + part['temp_max'] +
-                    " " + part['condition'] + ". Feels like " + part['feels_like'] +
-                    ". Wind speed " + part['wind_speed'] + " up to " + part['wind_gust'] + " m/s",
+                    str(part['temp_min']) + "..." + str(part['temp_max']) +
+                    " " + part['condition'] + ". Feels like " + str(part['feels_like']) +
+                    ". Wind speed " + str(part['wind_speed']) + " up to " + str(part['wind_gust']) + " m/s",
                     font=font,
                     fill='green')
                 delta_y = 20
