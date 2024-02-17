@@ -9,4 +9,6 @@ podman generate systemd --new --files --name home-db
 mkdir -p ~/.config/systemd/user/
 cp -Z container-home-db.service ~/.config/systemd/user/
 podman stop home-db && podman rm -a && podman volume prune
+sudo loginctl enable-linger <username>
 systemctl --user daemon-reload
+
